@@ -1,0 +1,105 @@
+//: Playground - noun: a place where people can play
+// tree created methond is refered from--->>> https://www.youtube.com/watch?v=eX6oGfb5RSk&t=690s&index=2&list=PL0dzCUj1L5JFJlR7dpBfBtEJB84pCZJ3R
+
+import UIKit
+
+let arr = [1,5,3,7,2,8,10,6,13,20,15]
+
+class Node{
+    let val : Int?
+    var leftChild : Node?
+    var rightChild : Node?
+    
+    init(value:Int,left:Node?,right:Node?){
+        val = value
+        leftChild = left
+        rightChild = right
+    }
+}
+
+//      14
+//     /  \
+//    10   20
+//   / \   /
+//  8  11  15
+
+let node15 = Node(value: 15, left: nil, right: nil)
+let node8 = Node(value: 8, left: nil, right: nil)
+let node11 = Node(value: 11, left: nil, right: nil)
+let node10 = Node(value: 10, left: node8, right: node11)
+let node20 = Node(value: 20, left: node15, right: nil)
+let Node14 = Node(value: 14, left: node10, right: node20)
+
+
+// search value
+func searchValue(root:Node?,val:Int)->Bool{
+    if(root == nil){
+        return false
+    }
+    if(root?.val == val){
+        return true
+    }else if((root?.val)! > val){
+        return searchValue(root: root?.leftChild, val: val)
+    }else{
+        return searchValue(root: root?.rightChild, val: val)
+    }
+}
+
+searchValue(root: Node14, val: 1)
+
+
+
+//in order traverse
+
+func inOrder(node:Node){
+    if let left = node.leftChild {
+        inOrder(node: left)
+    }
+    print(node.val!)
+    if let right = node.rightChild{
+        inOrder(node: right)
+    }
+}
+
+inOrder(node: Node14)
+
+
+
+
+// preOrder traverse
+
+func preOrder(node:Node){
+    print(node.val)
+    if let left = node.leftChild{
+        preOrder(node: left)
+    }
+    if let right = node.rightChild{
+        preOrder(node: right)
+    }
+}
+preOrder(node: Node14!)
+
+
+
+
+//postOrder traverse
+func postOrder(node:Node){
+    if let left = node.leftChild{
+        postOrder(node: left)
+    }
+    if let right = node.rightChild{
+        postOrder(node: right)
+    }
+    print(node.val)
+}
+postOrder(node: Node14)
+
+
+
+
+
+
+
+
+
+
